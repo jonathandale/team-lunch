@@ -3,7 +3,7 @@ import RestaurantListContainer from '../containers/RestaurantListContainer';
 import '../index.css';
 
 const App = () => (
-  <div className="font-sans">
+  <div className="font-sans antialiased">
     <RestaurantListContainer />
   </div>
 )

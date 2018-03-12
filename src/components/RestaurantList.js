@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Restaurant from './Restaurant';
 
 const RestaurantList = ({restaurants}) => (
-  <div className="m-2">
-    <h3>List of restaurants:</h3>
+  <div className="m-8">
     <ul className="list-reset">
-      {restaurants.map((restaurant, i) =>
-        <li key={i}
-            className="pb-2 pt-2">
-         {restaurant.name}</li>
+      {restaurants.map(restaurant =>
+        <Restaurant key={restaurant.id} {...restaurant} />
       )}
     </ul>
   </div>
