@@ -15,3 +15,8 @@ export const fetchRestaurants = () => dispatch => {
   return restaurants.getAll()
     .then(response => dispatch(receiveRestaurants(response)));
 };
+
+export const toggleVisited = id => ({
+  type: types.RESTAURANT_TOGGLE_VISITED,
+  id
+});
