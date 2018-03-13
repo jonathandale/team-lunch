@@ -35,7 +35,8 @@ const getRestaurants = ({restaurants}, visitedIds) => {
 
 const mapStateToProps = state => {
   return {
-    restaurants: getRestaurants(state.restaurants, state.visited)
+    restaurants: getRestaurants(state.restaurants, state.visited),
+    isFetching: state.restaurants.isFetching
   }
 };
 

@@ -16,18 +16,22 @@ const printTitle = notVisited => {
 
 export default class RestaurantList extends Component {
   render() {
-    const {restaurants, onRestaurantClick} = this.props;
+    const {restaurants, onRestaurantClick, isFetching} = this.props;
     return (
       <div className="m-8">
-        <h3 className="pl-4 font-normal text-2xl">{printTitle(restaurants.notVisited)}</h3>
-        <p className="text-sm text-grey-darkest pb-4 pl-4">{printRunWay(restaurants.notVisited)}</p>
-        <ul className="list-reset mt-4">
-          {restaurants.notVisited.map(restaurant =>
-            <Restaurant key={restaurant.id} {...restaurant} onClick={() => onRestaurantClick(restaurant.id)} />
-          )}
-        </ul>
+        {!isFetching &&
+          <div>
+            <h3 className="pl-4 font-normal text-2xl">{printTitle(restaurants.notVisited)}</h3>
+            <p className="text-sm text-grey-darkest pb-4 pl-4">{printRunWay(restaurants.notVisited)}</p>
+            <ul className="list-reset mt-4">
+            {restaurants.notVisited.map(restaurant =>
+              <Restaurant key={restaurant.id} {...restaurant} onClick={() => onRestaurantClick(restaurant.id)} />
+            )}
+            </ul>
+          </div>
+        }
         {
-          restaurants.visited.length > 0 &&
+          (!isFetching && restaurants.visited.length > 0) &&
           <div>
             <h3 className="mt-6 p-4 mb-2 font-normal">Already visited</h3>
             <ul className="list-reset">
@@ -44,5 +48,6 @@ export default class RestaurantList extends Component {
 
 RestaurantList.propTypes = {
   restaurants: PropTypes.object.isRequired,
-  onRestaurantClick: PropTypes.func.isRequired
+  onRestaurantClick: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired
 };
