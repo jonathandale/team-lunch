@@ -1,13 +1,18 @@
 import { combineReducers } from 'redux';
 import * as types from '../constants/ActionTypes';
 import remove from 'lodash/remove';
+import haversine from 'haversine';
 
 const VISITED_KEY = 'team-lunch-visited';
 
 // Initial restaurant state
 const initialState = {
   restaurants: [],
-  isFetching: false
+  isFetching: false,
+  officeCoords: {
+    latitude: 38.0251898,
+    longitude: -78.4834939
+  }
 };
 
 // Reducer for handling restaurant request/response
@@ -22,7 +27,16 @@ const restaurants = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        restaurants: action.restaurants
+        restaurants: action.restaurants.map(restaurant => {
+          let {latitude, longitude} = restaurant.location;
+          // Add distance from office to restaurant
+          restaurant.distanceFromOffice = haversine(
+            state.officeCoords,
+            {latitude, longitude},
+            {unit: 'mile'}
+          );
+          return restaurant;
+        })
       }
     default:
       return state;
