@@ -13,7 +13,9 @@ const requestRestaurants = () => ({
 export const fetchRestaurants = () => dispatch => {
   dispatch(requestRestaurants());
   return restaurants.getAll()
-    .then(response => dispatch(receiveRestaurants(response)));
+    .then(response => {
+      dispatch(receiveRestaurants(response));
+    });
 };
 
 export const toggleVisited = id => ({

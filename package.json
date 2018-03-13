@@ -26,6 +26,7 @@
     "postcss-cli": "^5.0.0",
     "prop-types": "^15.6.1",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.1",
     "tailwindcss": "^0.4.3"
   }
 }
