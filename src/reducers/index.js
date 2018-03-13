@@ -43,6 +43,7 @@ const restaurants = (state = initialState, action) => {
   }
 }
 
+// Load initial visited IDs from local storage — if available
 const localVisited = localStorage.getItem(VISITED_KEY);
 const initialVisited = !!localVisited ? localVisited.split(',') : [];
 const visited = (state = initialVisited, action) => {
@@ -53,8 +54,6 @@ const visited = (state = initialVisited, action) => {
     let newIds = hasVisited ?
       remove(state, id => { return id !== action.id; })
       : [...state, action.id];
-    //This shouldn't go here. No side-effects!
-    localStorage.setItem(VISITED_KEY, newIds);
     return newIds;
   }
   return state;
